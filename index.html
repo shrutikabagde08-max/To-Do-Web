@@ -2,16 +2,18 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discipline Time</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
     <header>
         <h2>Discipline Time</h2>
         <p>Mark your daily activities to become better from yesterday</p>
+
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -21,152 +23,260 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <h1>Welcome to Discipline Time</h1>
-        <p>Discipline Time is a web application designed to help you stay organized and focused on your daily
-            activities. With our easy-to-use interface, you can set your goals, track your progress, and build a routine
-            that works for you.</p>
-        <p>Whether you're looking to improve your study habits, build a healthier lifestyle, or simply stay on top of
-            your daily tasks, Discipline Time has got you covered.</p>
-        <section>
-            <div class="cards">
-                <div class="card">
-                    <h3>Age</h3>
-                    <p>select your age</p>
-                    <select>
-                        <option>18-25</option>
-                        <option>26-35</option>
-                        <option>36-45</option>
-                    </select>
-                </div>
-                <div class="card">
-                    <h3>target</h3>
 
-                    <p>select your targets</p>
-                    <select>
-                        <option>Study goal</option>
-                        <option>Build body</option>
-                        <option>Gain focus</option>
-                    </select>
-                </div>
-                <div class="card">
-                    <h3>Time</h3>
-                    <p>select your time</p>
-                    <select>
-                        <option>30 minutes</option>
-                        <option>1 hour</option>
-                        <option>2 hours</option>
-                        <option>3+ hours</option>
-                    </select>
-                </div>
-                <div class="card">
-                    <h3>Routine</h3>
-                    <p>select your routine</p>
-                    <select>
-                        <option>Morning</option>
-                        <option>Afternoon</option>
-                        <option>Evening</option>
-                    </select>
-                </div>
-            </div>
-        </section>
-        <div class="list">
-            <h3>Daily Routine</h3>
-            <ul>
-                <li><input type="checkbox"> Wake up</li>
-                <li><input type="checkbox"> Exercise</li>
-                <li><input type="checkbox"> Breakfast</li>
-                <li><input type="checkbox"> Work/Study</li>
-                <li><input type="checkbox"> Lunch</li>
-                <li><input type="checkbox"> Work/Study</li>
-                <li><input type="checkbox"> Dinner</li>
-                <li><input type="checkbox"> Relaxation</li>
-                <li><input type="checkbox"> Sleep</li>
-            </ul>
-        </div>
-        <div class="tips">
-            <div class="study">
-                <h3>Study Tips</h3>
-                <p>1. Do the meditation before performing any task.</p>
-                <p>2. Set specific goals for each study session.</p>
-                <p>3. Take regular breaks to avoid burnout.</p>
-                <p>4. Use active learning techniques like summarizing and teaching others.</p>
-                <p>5. Eliminate distractions by turning off notifications and finding a quiet study space.</p>
-                <p>6. Practice past papers and sample questions to improve exam performance.</p>
-            </div>
+        <section id="home">
 
-            <div class="body">
-                <h3>Body Building Tips</h3>
-                <p>1. Eat a balanced diet with enough protein to support muscle growth.</p>
-                <p>2. Incorporate strength training exercises into your routine.</p>
-                <p>3. Get enough rest and recovery time between workouts.</p>
-                <p>4. Stay hydrated and avoid excessive alcohol consumption.</p>
-                <p>5. Track your progress and adjust your routine as needed.</p>
-            </div>
-            <div class="focus">
-                <h3>Focus Tips</h3>
-                <p>1. Prioritize your tasks and focus on the most important ones first.</p>
-                <p>2. Use time-blocking techniques to schedule focused work sessions.</p>
-                <p>3. Eliminate distractions by turning off notifications and finding a quiet workspace.</p>
-                <p>4. Take regular breaks to avoid burnout and maintain productivity.</p>
-                <p>5. Practice mindfulness and meditation to improve focus and concentration.</p>
-            </div>
-        </div>
-        <main id="home">
-            <h2>Home</h2>
-            <p>Welcome to Discipline Time! This is your home page where you can find an overview of your daily routine
-                and
-                access different sections of the application.</p>
-            <section id="targets">
-                <h2>Targets</h2>
-                <p>Set your targets and goals for the day, week, or month. Stay focused and motivated to achieve them!
-                </p>
-                <section id="calendar">
-                    <h2>Calendar</h2>
+            <h1>Welcome to Discipline Time</h1>
 
-                    <div id="calendar-container">
-                        <h3 id="month-year"></h3>
+            <p>
+                Discipline Time is a web application designed to help you stay
+                organized and focused on your daily activities.
+            </p>
 
-                        <table id="calendar-table">
-                            <thead>
-                                <tr>
-                                    <th>Sun</th>
-                                    <th>Mon</th>
-                                    <th>Tue</th>
-                                    <th>Wed</th>
-                                    <th>Thu</th>
-                                    <th>Fri</th>
-                                    <th>Sat</th>
-                                </tr>
-                            </thead>
+            <p>
+                Set your goals, track your progress, manage your tasks and build
+                a routine that works for you.
+            </p>
 
-                            <tbody id="calendar-body"></tbody>
-                        </table>
+            <section>
+                <div class="cards">
+
+                    <div class="card">
+                        <h3>Age</h3>
+                        <label for="age">Select your age</label>
+                        <select id="age">
+                            <option value="18-25">18-25</option>
+                            <option value="26-35">26-35</option>
+                            <option value="36-45">36-45</option>
+                        </select>
                     </div>
-                </section>
 
-                <p>Keep track of your schedule and important events with our built-in calendar feature. Never miss a
-                    deadline again!</p>
+                    <div class="card">
+                        <h3>Target</h3>
+                        <label for="target">Select your target</label>
+                        <select id="target">
+                            <option value="Study goal">Study goal</option>
+                            <option value="Build body">Build body</option>
+                            <option value="Gain focus">Gain focus</option>
+                        </select>
+                    </div>
+
+                    <div class="card">
+                        <h3>Time</h3>
+                        <label for="time">Select your time</label>
+                        <select id="time">
+                            <option value="30 minutes">30 minutes</option>
+                            <option value="1 hour">1 hour</option>
+                            <option value="2 hours">2 hours</option>
+                            <option value="3+ hours">3+ hours</option>
+                        </select>
+                    </div>
+
+                    <div class="card">
+                        <h3>Routine</h3>
+                        <label for="routine">Select your routine</label>
+                        <select id="routine">
+                            <option value="Morning">Morning</option>
+                            <option value="Afternoon">Afternoon</option>
+                            <option value="Evening">Evening</option>
+                        </select>
+                    </div>
+
+                </div>
             </section>
-            <section id="notes">
-                <h2>Notes</h2>
-                <textarea placeholder="Write your thoughts here......"></textarea>
-                <p>Take notes and jot down important information to stay organized and on top of your tasks.</p>
+
+            <section class="list">
+
+                <h3>Daily Tasks</h3>
+
+                <div class="task-input">
+                    <label for="taskInput">Add a task</label>
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="Enter your task"
+                    >
+                    <button id="addTaskBtn" type="button">Add Task</button>
+                </div>
+
+                <p id="progress">Progress: 0 / 0 completed</p>
+
+                <ul id="taskList">
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Wake up</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Exercise</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Breakfast</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Work/Study</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Lunch</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Work/Study</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Dinner</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Relaxation</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                    <li>
+                        <input type="checkbox">
+                        <span>Sleep</span>
+                        <button class="delete-btn" type="button">Delete</button>
+                    </li>
+
+                </ul>
+
             </section>
-        </main>
-        <article>
-    <h3>Thoughts</h3>
 
-    <p id="thought">
-        Discipline is the bridge between goals and accomplishment.
-    </p>
+            <section class="tips">
 
-    <button id="thoughtBtn">New Thought</button>
-</article>
-        <footer>
-            <p>&copy; 2026 Discipline Time. All rights reserved.</p>
-        </footer>
-        <script src="script.js"></script>
+                <div class="study">
+                    <h3>Study Tips</h3>
+                    <p>1. Meditate before performing any task.</p>
+                    <p>2. Set specific goals for each study session.</p>
+                    <p>3. Take regular breaks to avoid burnout.</p>
+                    <p>4. Use active learning techniques.</p>
+                    <p>5. Eliminate distractions.</p>
+                    <p>6. Practice past papers and sample questions.</p>
+                </div>
+
+                <div class="body">
+                    <h3>Body Building Tips</h3>
+                    <p>1. Eat a balanced diet.</p>
+                    <p>2. Include strength training in your routine.</p>
+                    <p>3. Get enough rest and recovery.</p>
+                    <p>4. Stay hydrated.</p>
+                    <p>5. Track your progress.</p>
+                </div>
+
+                <div class="focus">
+                    <h3>Focus Tips</h3>
+                    <p>1. Prioritize important tasks.</p>
+                    <p>2. Use time-blocking techniques.</p>
+                    <p>3. Eliminate distractions.</p>
+                    <p>4. Take regular breaks.</p>
+                    <p>5. Practice mindfulness.</p>
+                </div>
+
+            </section>
+
+        </section>
+
+        <section id="targets">
+
+            <h2>Targets</h2>
+
+            <p>
+                Set your targets and goals. Stay focused and motivated
+                to achieve them.
+            </p>
+
+        </section>
+
+        <section id="calendar">
+
+            <h2>Calendar</h2>
+
+            <div id="calendar-container">
+
+                <h3 id="month-year"></h3>
+
+                <table id="calendar-table">
+
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="calendar-body"></tbody>
+
+                </table>
+
+            </div>
+
+            <p>
+                Keep track of your schedule and important events
+                with the built-in calendar.
+            </p>
+
+        </section>
+
+        <section id="notes">
+
+            <h2>Notes</h2>
+
+            <textarea
+                id="notesInput"
+                placeholder="Write your thoughts here..."
+            ></textarea>
+
+            <button id="saveNotesBtn" type="button">Save Notes</button>
+
+            <p id="noteStatus"></p>
+
+        </section>
+
+    </main>
+
+    <article>
+
+        <h3>Thoughts</h3>
+
+        <p id="thought">
+            Discipline is the bridge between goals and accomplishment.
+        </p>
+
+        <button id="thoughtBtn" type="button">New Thought</button>
+
+    </article>
+
+    <footer>
+        <p>&copy; 2026 Discipline Time. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 
 </body>
 

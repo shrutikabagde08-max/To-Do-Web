@@ -1,173 +1,167 @@
-const checkboxes = document.querySelectorAll('.list input[type="checkbox"]');
-const cards = document.querySelectorAll('.card');
-const targetCard = cards[1];
+const taskInput = document.querySelector("#taskInput");
+const addTaskBtn = document.querySelector("#addTaskBtn");
+const taskList = document.querySelector("#taskList");
+const progress = document.querySelector("#progress");
 
-const targetOptions = targetCard.querySelectorAll('p');
-const links = document.querySelectorAll("nav a");
+const age = document.querySelector("#age");
+const target = document.querySelector("#target");
+const time = document.querySelector("#time");
+const routine = document.querySelector("#routine");
 
+const notesInput = document.querySelector("#notesInput");
+const saveNotesBtn = document.querySelector("#saveNotesBtn");
+const noteStatus = document.querySelector("#noteStatus");
 
-
-checkboxes.forEach((checkbox) => {
-
-    checkbox.addEventListener('change', () => {
-
-        const text = checkbox.parentElement;
-
-        if (checkbox.checked) {
-
-            text.style.textDecoration = 'line-through';
-            text.style.color = '#176b5b';
-
-        } else {
-
-            text.style.textDecoration = 'none';
-            text.style.color = '';
-
-        }
-
-        saveTasks();
-    });
-});
-
-
-function saveTasks() {
-
-    const tasks = [];
-
-    checkboxes.forEach((checkbox) => {
-
-        tasks.push(checkbox.checked);
-
-    });
-
-    localStorage.setItem(
-        'disciplineTasks',
-        JSON.stringify(tasks)
-    );
-}
-
-
-function loadTasks() {
-
-    const savedTasks =
-        JSON.parse(localStorage.getItem('disciplineTasks'));
-
-    if (!savedTasks) {
-        return;
-    }
-
-    checkboxes.forEach((checkbox, index) => {
-
-        checkbox.checked = savedTasks[index];
-
-        if (checkbox.checked) {
-
-            checkbox.parentElement.style.textDecoration =
-                'line-through';
-
-            checkbox.parentElement.style.color =
-                '#176b5b';
-        }
-    });
-}
-
-
-loadTasks();
-
-
-
-
-targetOptions.forEach((option) => {
-
-    option.addEventListener('click', () => {
-
-        targetOptions.forEach((item) => {
-
-            item.style.fontWeight = 'normal';
-            item.style.color = '';
-
-        });
-
-        option.style.fontWeight = 'bold';
-        option.style.color = '#176b5b';
-
-    });
-
-});
-
-
-
-
-links.forEach((link) => {
-
-    link.addEventListener('click', (event) => {
-
-        event.preventDefault();
-
-        const targetId = link.getAttribute("href");
-
-        const targetSection =
-            document.querySelector(targetId);
-
-        targetSection.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    });
-
-});
-
-
-
-
+const thought = document.querySelector("#thought");
+const thoughtBtn = document.querySelector("#thoughtBtn");
 
 const calendarBody = document.querySelector("#calendar-body");
 const monthYear = document.querySelector("#month-year");
 
-const currentDate = new Date();
+let tasks = JSON.parse(localStorage.getItem("disciplineTasks")) || [
+    { text: "Wake up", completed: false },
+    { text: "Exercise", completed: false },
+    { text: "Breakfast", completed: false },
+    { text: "Work/Study", completed: false },
+    { text: "Lunch", completed: false },
+    { text: "Work/Study", completed: false },
+    { text: "Dinner", completed: false },
+    { text: "Relaxation", completed: false },
+    { text: "Sleep", completed: false }
+];
 
-const year = currentDate.getFullYear();
-const month = currentDate.getMonth();
-
-const monthName = currentDate.toLocaleString("default", {
-    month: "long"
-});
-
-monthYear.textContent = monthName + " " + year;
-
-const firstDay = new Date(year, month, 1).getDay();
-const totalDays = new Date(year, month + 1, 0).getDate();
-
-let row = document.createElement("tr");
-
-
-for (let i = 0; i < firstDay; i++) {
-    const cell = document.createElement("td");
-    row.appendChild(cell);
+function saveTasks() {
+    localStorage.setItem("disciplineTasks", JSON.stringify(tasks));
 }
 
+function updateProgress() {
+    const completedTasks = tasks.filter(task => task.completed).length;
+    progress.textContent =
+        "Progress: " + completedTasks + " / " + tasks.length + " completed";
+}
 
+function displayTasks() {
+    taskList.innerHTML = "";
 
-for (let day = 1; day <= totalDays; day++) {
+    tasks.forEach((task, index) => {
+        const li = document.createElement("li");
 
-    const cell = document.createElement("td");
+        if (task.completed) {
+            li.classList.add("completed");
+        }
 
-    cell.textContent = day;
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.completed;
+        checkbox.setAttribute("aria-label", "Complete " + task.text);
 
-    row.appendChild(cell);
+        const span = document.createElement("span");
+        span.textContent = task.text;
 
-    if ((firstDay + day) % 7 === 0) {
-        calendarBody.appendChild(row);
-        row = document.createElement("tr");
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.type = "button";
+        deleteBtn.setAttribute("aria-label", "Delete " + task.text);
+
+        checkbox.addEventListener("change", () => {
+            tasks[index].completed = checkbox.checked;
+            saveTasks();
+            displayTasks();
+        });
+
+        deleteBtn.addEventListener("click", () => {
+            tasks.splice(index, 1);
+            saveTasks();
+            displayTasks();
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+
+        taskList.appendChild(li);
+    });
+
+    updateProgress();
+}
+
+function addTask() {
+    const text = taskInput.value.trim();
+
+    if (text === "") {
+        taskInput.focus();
+        return;
+    }
+
+    tasks.push({
+        text: text,
+        completed: false
+    });
+
+    saveTasks();
+    displayTasks();
+
+    taskInput.value = "";
+    taskInput.focus();
+}
+
+addTaskBtn.addEventListener("click", addTask);
+
+taskInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        addTask();
+    }
+});
+
+function savePreferences() {
+    localStorage.setItem("disciplineAge", age.value);
+    localStorage.setItem("disciplineTarget", target.value);
+    localStorage.setItem("disciplineTime", time.value);
+    localStorage.setItem("disciplineRoutine", routine.value);
+}
+
+function loadPreferences() {
+    const savedAge = localStorage.getItem("disciplineAge");
+    const savedTarget = localStorage.getItem("disciplineTarget");
+    const savedTime = localStorage.getItem("disciplineTime");
+    const savedRoutine = localStorage.getItem("disciplineRoutine");
+
+    if (savedAge) {
+        age.value = savedAge;
+    }
+
+    if (savedTarget) {
+        target.value = savedTarget;
+    }
+
+    if (savedTime) {
+        time.value = savedTime;
+    }
+
+    if (savedRoutine) {
+        routine.value = savedRoutine;
     }
 }
 
+age.addEventListener("change", savePreferences);
+target.addEventListener("change", savePreferences);
+time.addEventListener("change", savePreferences);
+routine.addEventListener("change", savePreferences);
 
-if (row.children.length > 0) {
-    calendarBody.appendChild(row);
+loadPreferences();
+displayTasks();
+
+const savedNotes = localStorage.getItem("disciplineNotes");
+
+if (savedNotes) {
+    notesInput.value = savedNotes;
 }
-const thought = document.querySelector("#thought");
-const thoughtBtn = document.querySelector("#thoughtBtn");
+
+saveNotesBtn.addEventListener("click", () => {
+    localStorage.setItem("disciplineNotes", notesInput.value);
+    noteStatus.textContent = "Notes saved successfully.";
+});
 
 const thoughts = [
     "Discipline is the bridge between goals and accomplishment.",
@@ -181,11 +175,49 @@ const thoughts = [
 ];
 
 thoughtBtn.addEventListener("click", () => {
-
-    const randomIndex = Math.floor(
-        Math.random() * thoughts.length
-    );
-
+    const randomIndex = Math.floor(Math.random() * thoughts.length);
     thought.textContent = thoughts[randomIndex];
-
 });
+
+const currentDate = new Date();
+
+const year = currentDate.getFullYear();
+const month = currentDate.getMonth();
+const today = currentDate.getDate();
+
+const monthName = currentDate.toLocaleString("default", {
+    month: "long"
+});
+
+monthYear.textContent = monthName + " " + year;
+
+const firstDay = new Date(year, month, 1).getDay();
+const totalDays = new Date(year, month + 1, 0).getDate();
+
+let row = document.createElement("tr");
+
+for (let i = 0; i < firstDay; i++) {
+    const cell = document.createElement("td");
+    row.appendChild(cell);
+}
+
+for (let day = 1; day <= totalDays; day++) {
+    const cell = document.createElement("td");
+
+    cell.textContent = day;
+
+    if (day === today) {
+        cell.classList.add("today");
+    }
+
+    row.appendChild(cell);
+
+    if ((firstDay + day) % 7 === 0) {
+        calendarBody.appendChild(row);
+        row = document.createElement("tr");
+    }
+}
+
+if (row.children.length > 0) {
+    calendarBody.appendChild(row);
+}
